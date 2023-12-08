@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+wget -O playlist.m3u8 "http://81.211.33.93/hls-live2/streams/1tv-orbit-plus-4/1tv-orbit-plus-45.m3u8?cdn=https://edge1.1internet.tv&s=VKDwpHEV79V%2FmS5QXzm%2Fbr0ds9qr5kVG9%2BPtWM%2FYGJO9s2ulryboR8HbFF28xjWeWVkJLj99s4x0xcfYxpzDjyu5F4wTCDQkznC4kTtxoMI%3D"||exit 1
+a=$(cat playlist.m3u8|grep -i "\.ts"|tail -n 1|tail -c 26)
+b=$(echo $a|head -c 2)
+c=$(echo $a|head -c 5|tail -c 2)                        d=$(echo $a|head -c 7|tail -c 2)
+e=$(echo $a|head -c 9|tail -c 2)
+f=$(echo $a|head -c 22|tail -c 6)
+./download_with_subs.sh $b $c $d $e $f
+cat *.vtt|grep -i "\-->"||rm *.vtt
